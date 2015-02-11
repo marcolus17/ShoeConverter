@@ -9,7 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var mensShoeSizeTextField: UITextField!
+    @IBOutlet weak var mensConvertedShoeSizeLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +24,23 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func convertButtonPressed(sender: UIButton) {
+        // grab input and change to integer
+        let numberFromTextField = mensShoeSizeTextField.text.toInt()
+        var integerFromTextField = numberFromTextField!
+        
+        // add conversion factor
+        let conversionConstant = 30
+        integerFromTextField += conversionConstant
+        
+        // unhide label and show result
+        mensConvertedShoeSizeLabel.hidden = false
+        mensConvertedShoeSizeLabel.text = "\(integerFromTextField)"
+        
+        // clear text field and close keyboard
+        mensShoeSizeTextField.text = ""
+        mensShoeSizeTextField.resignFirstResponder()
+    }
 
 }
 
