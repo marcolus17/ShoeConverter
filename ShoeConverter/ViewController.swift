@@ -11,8 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var mensShoeSizeTextField: UITextField!
+    @IBOutlet weak var womensShoeSizeTextField: UITextField!
     @IBOutlet weak var mensConvertedShoeSizeLabel: UILabel!
-    
+    @IBOutlet weak var womensConvertedShoeSizeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,21 +27,29 @@ class ViewController: UIViewController {
 
     @IBAction func convertButtonPressed(sender: UIButton) {
         // grab input and change to integer
-        let numberFromTextField = mensShoeSizeTextField.text.toInt()
-        var integerFromTextField = numberFromTextField!
+        let sizeFromTextField = mensShoeSizeTextField.text.toInt()!
         
-        // add conversion factor
+        // conversion factor
         let conversionConstant = 30
-        integerFromTextField += conversionConstant
         
         // unhide label and show result
         mensConvertedShoeSizeLabel.hidden = false
-        mensConvertedShoeSizeLabel.text = "\(integerFromTextField)"
+        mensConvertedShoeSizeLabel.text = "\(sizeFromTextField + conversionConstant)" + " in European shoe size"
         
         // clear text field and close keyboard
         mensShoeSizeTextField.text = ""
         mensShoeSizeTextField.resignFirstResponder()
     }
 
+    @IBAction func womensConvertButtonPressed(sender: UIButton) {
+        let sizeFromTextField = Double((womensShoeSizeTextField.text as NSString).doubleValue)
+        let conversionConstant = 30.5
+        
+        womensConvertedShoeSizeLabel.hidden = false
+        womensConvertedShoeSizeLabel.text = "\(sizeFromTextField + conversionConstant) in European shoe size"
+        
+        womensShoeSizeTextField.text = ""
+        womensShoeSizeTextField.resignFirstResponder()
+    }
 }
 
